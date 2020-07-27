@@ -1,8 +1,20 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
-import { Box, Container } from '@material-ui/core';
+import { Box, Container, Grid, Paper } from '@material-ui/core';
 import SearchBox from "../components/SearchBox/index";
+import ResultContainer from "../components/ResultContainer/index";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  box: {
+    margin: theme.spacing(2),
+  }
+}));
+
+  
+
+
 
 function Search() {
   // const [books, setBooks] = useState([])
@@ -44,15 +56,26 @@ function Search() {
   //   }
   // };
 
+  const classes = useStyles();
+
     return (
       <Container>
-        <Box>
-          <SearchBox 
-          title={"Search for a Book"}
-          label={"Book Title"}
-          btnText={"Search"}
-          ></SearchBox>
-        </Box>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={4}>
+            <Box className={classes.box}>
+              <SearchBox 
+              title={"Search for a Book"}
+              label={"Book Title"}
+              btnText={"Search"}
+              ></SearchBox>
+            </Box>
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <Box className={classes.box}>
+              <ResultContainer title={"Results"}></ResultContainer>
+            </Box>
+          </Grid>
+        </Grid>
       </Container>
     );
   }
