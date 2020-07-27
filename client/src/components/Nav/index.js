@@ -1,18 +1,19 @@
 import React from "react";
+import { Paper, Tabs, Tab } from '@material-ui/core';
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a className="navbar-brand" href="/">
-        Google Books Search
-      </a>
-      <a className="navbar-brand" href="/">
-        Search
-      </a>
-      <a className="navbar-brand" href="/saved">
-        Saved
-      </a>
-    </nav>
+    <Paper square>
+      <Tabs
+        indicatorColor="primary"
+        textColor="primary"
+        aria-label="tabs"
+      >
+        <Tab label="Google Books Search" href="/"/>
+        <Tab label="Search" href="/search"/>
+        <Tab label="Save" href="/saved"/>
+      </Tabs>
+    </Paper>
   );
 }
 
