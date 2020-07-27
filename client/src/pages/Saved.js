@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import API from "../utils/API";
+import { Box, Container, Grid } from '@material-ui/core';
+import ResultContainer from "../components/ResultContainer/index";
+import ResultCard from "../components/ResultCard/index";
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  box: {
+    margin: theme.spacing(2),
+  }
+}));
 
 function Saved(props) {
   // const [book, setBook] = useState({})
@@ -14,8 +24,29 @@ function Saved(props) {
   //     .catch(err => console.log(err));
   // }, [])
 
+  const classes = useStyles();
+
   return (
-    <div></div>
+    <Container>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={12}>
+            <Box className={classes.box}>
+              <ResultContainer title={"Saved Books"}
+              resultCard={<ResultCard
+                src={"https://via.placeholder.com/150"}
+                title={"Harry Potter"}
+                tagline={"Book about wizards"}
+                author={"JK Rowling"}
+                summary={"lorem ipsum stuff about harry potter summary stuff"}
+                LbtnText={"View"}
+                RbtnText={"Delete"}
+                ></ResultCard>} 
+              >
+              </ResultContainer>
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
     );
   }
 

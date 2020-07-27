@@ -26,13 +26,13 @@ export default function ResultCard(props) {
                         className={classes.button}
                         variant="contained"
                         color="primary">
-                            View
+                        {props.LbtnText}
                     </Button>
                     <Button
                         className={classes.button}
                         variant="contained"
                         color="primary">
-                            Save
+                        {props.RbtnText}
                     </Button>
                 </div>
             </div>
