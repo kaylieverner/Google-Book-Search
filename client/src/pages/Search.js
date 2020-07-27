@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
-
+import { Box, Container } from '@material-ui/core';
+import SearchBox from "../components/SearchBox/index";
 
 function Search() {
   // const [books, setBooks] = useState([])
@@ -44,7 +45,11 @@ function Search() {
   // };
 
     return (
-      <div></div>
+      <Container>
+        <Box>
+          <SearchBox></SearchBox>
+        </Box>
+      </Container>
     );
   }
 
