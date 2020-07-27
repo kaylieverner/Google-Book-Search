@@ -11,7 +11,7 @@ function Nav() {
       >
         <Tab label="Google Books Search" href="/"/>
         <Tab label="Search" href="/search"/>
-        <Tab label="Save" href="/saved"/>
+        <Tab label="Saved" href="/saved"/>
       </Tabs>
     </Paper>
   );
