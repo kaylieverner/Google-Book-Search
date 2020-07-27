@@ -47,7 +47,11 @@ function Search() {
     return (
       <Container>
         <Box>
-          <SearchBox></SearchBox>
+          <SearchBox 
+          title={"Search for a Book"}
+          label={"Book Title"}
+          btnText={"Search"}
+          ></SearchBox>
         </Box>
       </Container>
     );

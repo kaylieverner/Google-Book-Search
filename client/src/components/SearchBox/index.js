@@ -9,25 +9,24 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function SearchBox() {
+export default function SearchBox(props) {
     const classes = useStyles();
 
     return (
     <div className="card">
         <div className="card-body">
-            <h3>Search for a Book</h3>
+        <h3>{props.title}</h3>
             <form className="form" noValidate autoComplete="off">
-                <TextField id="outlined-basic" label="Enter a Book"/>
+                <TextField id="outlined-basic" label={props.label}/>
                 <Button
                 className={classes.button}
                 variant="contained"
                 color="primary"
                 endIcon={<SearchIcon/>}>
-                Search
+                {props.btnText}
                 </Button>
             </form>
         </div>
     </div>
     )
 }
-
