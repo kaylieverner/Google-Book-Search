@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Box, Container, Grid } from '@material-ui/core';
 import SearchBox from "../components/SearchBox/index";
 import ResultContainer from "../components/ResultContainer/index";
+import ResultCard from "../components/ResultCard/index";
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -69,7 +70,17 @@ function Search() {
           </Grid>
           <Grid item xs={12} sm={8}>
             <Box className={classes.box}>
-              <ResultContainer title={"Results"}></ResultContainer>
+              <ResultContainer title={"Results"}
+              resultCard={<ResultCard
+                src={"https://via.placeholder.com/150"}
+                title={"Harry Potter"}
+                tagline={"Book about wizards"}
+                author={"JK Rowling"}
+                summary={"lorem ipsum stuff about harry potter summary stuff"}
+                LbtnText={"View"}
+                RbtnText={"Save"}
+                ></ResultCard>}>
+                </ResultContainer>
             </Box>
           </Grid>
         </Grid>
