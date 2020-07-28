@@ -13,15 +13,32 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-
 function Search() {
-  // const [books, setBooks] = useState([])
-  // const [formObject, setFormObject] = useState({})
+  const [searchTerm, setSearchTerm] = useState([]);
+  const [results, setResults] = useState([]);
+  const [error, setError] = useState([]);
 
-  // useEffect(() => {
-  //   loadBooks()
-  // }, [])
+  useEffect(() => {
+  }, [])
+
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setSearchTerm({...searchTerm, [name]: value})
+  };
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    API.getBooks(searchTerm)
+    .then((result) => {
+      if (res.data.status === "error") {
+        throw new Error(res.data.message);
+      }
+      setResults({results: res.data})
+    })
+    .catch(err => this.setState({ error: err.message }));
+    }
+
+  
 
   // function loadBooks() {
   //   API.getBooks()
@@ -37,23 +54,30 @@ function Search() {
   //     .catch(err => console.log(err));
   // }
 
-  // function handleInputChange(event) {
-  //   const { name, value } = event.target;
-  //   setFormObject({...formObject, [name]: value})
-  // };
+  function populateResults(){
+    if (results.length > 0){
+      results.map(result => (
+        <ResultCard
+          key={result.id}
+          src={result.thumbnail}
+          title={result.title}
+          tagline={result.textSnippet}
+          author={result.authors}
+          summary={result.description}
+          LbtnText={"View"}
+          RbtnText={"Save"}
+        ></ResultCard>
+      ))
+      
+    } else {
+      <ResultCard
+                src={"https://via.placeholder.com/150"}
+                title={"No Results"}
+                ></ResultCard>
+    }
+  };
 
-  // function handleFormSubmit(event) {
-  //   event.preventDefault();
-  //   if (formObject.title && formObject.author) {
-  //     API.saveBook({
-  //       title: formObject.title,
-  //       author: formObject.author,
-  //       synopsis: formObject.synopsis
-  //     })
-  //       .then(res => loadBooks())
-  //       .catch(err => console.log(err));
-  //   }
-  // };
+  
 
   const classes = useStyles();
 
@@ -65,6 +89,8 @@ function Search() {
               <SearchBox 
               title={"Search for a Book"}
               label={"Book Title"}
+              onChange={handleInputChange}
+              onChange={handleFormSubmit}
               ></SearchBox>
             </Box>
           </Grid>
