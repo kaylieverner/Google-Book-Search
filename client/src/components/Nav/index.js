@@ -3,7 +3,7 @@ import { Paper, Tabs, Tab } from '@material-ui/core';
 
 function Nav() {
   return (
-    <Paper square>
+    <Paper>
       <Tabs
         indicatorColor="primary"
         textColor="primary"

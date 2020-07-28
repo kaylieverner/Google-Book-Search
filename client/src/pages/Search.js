@@ -12,6 +12,9 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   box: {
     margin: theme.spacing(2),
+  },
+  button: {
+    margin: theme.spacing(1),
   }
 }));
 
@@ -21,33 +24,35 @@ function Search() {
   const [error, setError] = useState([]);
 
   useEffect(() => {
-    loadBooks()
+  
   }, [])
 
   function loadBooks() {
     API.getBooks()
     .then(res => 
-      console.log(res.data)
+      // console.log(res.data)
+      console.log(res.data.items)
       )
       .catch(err => console.log(err))
   };
 
   function handleInputChange(event) {
     const { name, value } = event.target;
-    setSearchTerm({...searchTerm, [name]: value})
-    console.log(value);
+    setSearchTerm({searchTerm: value})
+    console.log(searchTerm);
   };
 
   function handleFormSubmit(event) {
     event.preventDefault();
     API.getBooks(searchTerm)
     .then((res) => {
-      if (res.data.status === "error") {
-        throw new Error(res.data.message);
-      }
-      setResults({results: res.data})
+      // if (res.data.status === "error") {
+      //   throw new Error(res.data.message);
+      // }
+      setResults({results: Object.entries(res.data.items)});
+      console.log(results);
     })
-    .catch(err => this.setState({ error: err.message }));
+    .catch(err => setError({ error: err.message }));
     };
 
   // function loadBooks() {
@@ -65,21 +70,23 @@ function Search() {
   // }
 
   function populateResults(){
-    if (results.length > 0){
-      results.map(result => (
+    if (Object.keys(results).length > 0){
+      console.log("hello")
+      return results.map(result => (
         <ResultCard
           key={result.id}
-          src={result.thumbnail}
-          title={result.title}
-          tagline={result.textSnippet}
-          author={result.authors}
-          summary={result.description}
+          src={result.volumeInfo.imageLinks.thumbnail}
+          title={result.volumeInfo.title}
+          tagline={result.searchInfo.textSnippet}
+          author={result.volumeInfo.authors}
+          summary={result.volumeInfo.description}
           LbtnText={"View"}
           RbtnText={"Save"}
         ></ResultCard>
       ))
       
     } else {
+      console.log(Object.keys(results).length)
       return <h2>No Results to Show</h2>
     }
   };
@@ -103,9 +110,9 @@ function Search() {
           </Grid>
           <Grid item xs={12} sm={8}>
             <Box className={classes.box}>
-              <ResultContainer title={"Results"}
-              resultCard={populateResults()}>
-                </ResultContainer>
+              <ResultContainer>
+                {populateResults()}
+              </ResultContainer>
             </Box>
           </Grid>
         </Grid>
