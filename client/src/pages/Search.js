@@ -19,7 +19,16 @@ function Search() {
   const [error, setError] = useState([]);
 
   useEffect(() => {
+    loadBooks()
   }, [])
+
+  function loadBooks() {
+    API.getBooks()
+    .then(res => 
+      console.log(res.data)
+      )
+      .catch(err => console.log(err))
+  };
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -29,16 +38,14 @@ function Search() {
   function handleFormSubmit(event) {
     event.preventDefault();
     API.getBooks(searchTerm)
-    .then((result) => {
+    .then((res) => {
       if (res.data.status === "error") {
         throw new Error(res.data.message);
       }
       setResults({results: res.data})
     })
     .catch(err => this.setState({ error: err.message }));
-    }
-
-  
+    };
 
   // function loadBooks() {
   //   API.getBooks()
@@ -70,14 +77,9 @@ function Search() {
       ))
       
     } else {
-      <ResultCard
-                src={"https://via.placeholder.com/150"}
-                title={"No Results"}
-                ></ResultCard>
+      return <h2>No Results to Show</h2>
     }
   };
-
-  
 
   const classes = useStyles();
 
@@ -97,15 +99,7 @@ function Search() {
           <Grid item xs={12} sm={8}>
             <Box className={classes.box}>
               <ResultContainer title={"Results"}
-              resultCard={<ResultCard
-                src={"https://via.placeholder.com/150"}
-                title={"Harry Potter"}
-                tagline={"Book about wizards"}
-                author={"JK Rowling"}
-                summary={"lorem ipsum stuff about harry potter summary stuff"}
-                LbtnText={"View"}
-                RbtnText={"Save"}
-                ></ResultCard>}>
+              resultCard={populateResults()}>
                 </ResultContainer>
             </Box>
           </Grid>
