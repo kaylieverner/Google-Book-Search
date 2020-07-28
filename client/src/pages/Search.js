@@ -43,17 +43,28 @@ function Search() {
   };
 
   function handleFormSubmit(event) {
-    event.preventDefault();
-    API.getBooks(searchTerm)
-    .then((res) => {
-      // if (res.data.status === "error") {
-      //   throw new Error(res.data.message);
-      // }
-      setResults({results: Object.entries(res.data.items)});
-      console.log(results);
-    })
-    .catch(err => setError({ error: err.message }));
-    };
+    const resultsStore = [];
+      event.preventDefault();
+      API.getBooks(searchTerm)
+      .then(res => setResults(res.data.items))
+      .then(console.log(results))
+      .catch(err => setError({ error: err.message }));
+      };
+
+
+  // function handleFormSubmit(event) {
+  //   event.preventDefault();
+  //   API.getBooks(searchTerm)
+  //   .then((res) => {
+  //     // if (res.data.status === "error") {
+  //     //   throw new Error(res.data.message);
+  //     // }
+  //     let response = res.data.items
+  //     setResults({results: response.json()});
+  //     console.log(results);
+  //   })
+  //   .catch(err => setError({ error: err.message }));
+  //   };
 
   // function loadBooks() {
   //   API.getBooks()
@@ -70,7 +81,7 @@ function Search() {
   // }
 
   function populateResults(){
-    if (Object.keys(results).length > 0){
+    if (results.length > 0){
       console.log("hello")
       return results.map(result => (
         <ResultCard
@@ -86,7 +97,7 @@ function Search() {
       ))
       
     } else {
-      console.log(Object.keys(results).length)
+
       return <h2>No Results to Show</h2>
     }
   };
