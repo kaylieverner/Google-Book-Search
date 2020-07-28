@@ -10,19 +10,14 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-export default function SearchBox(props) {
+export default function SearchBox({children}) {
     const classes = useStyles();
 
     return (
     <div className="card">
         <div className="card-body">
-        <h3>{props.title}</h3>
-            <form className="form" noValidate autoComplete="off">
-                <TextField id="outlined-basic" label={props.label}/>
-                <IconButton color="primary" aria-label="upload picture" component="span">
-                    <SearchIcon />
-                </IconButton>
-            </form>
+        <h3>Search</h3>
+        {children}
         </div>
     </div>
     )

@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
-import { Box, Container, Grid } from '@material-ui/core';
+import { Box, Container, Grid, TextField} from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@material-ui/core/IconButton';
 import SearchBox from "../components/SearchBox/index";
 import ResultContainer from "../components/ResultContainer/index";
 import ResultCard from "../components/ResultCard/index";
@@ -33,6 +35,7 @@ function Search() {
   function handleInputChange(event) {
     const { name, value } = event.target;
     setSearchTerm({...searchTerm, [name]: value})
+    console.log(value);
   };
 
   function handleFormSubmit(event) {
@@ -88,12 +91,14 @@ function Search() {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
             <Box className={classes.box}>
-              <SearchBox 
-              title={"Search for a Book"}
-              label={"Book Title"}
-              onChange={handleInputChange}
-              onChange={handleFormSubmit}
-              ></SearchBox>
+              <SearchBox>
+                <form className="form" noValidate autoComplete="off">
+                  <TextField id="outlined-basic" label="search" onChange={handleInputChange}/>
+                  <IconButton color="primary" aria-label="upload picture" component="span" onClick={handleFormSubmit}>
+                      <SearchIcon />
+                  </IconButton>
+                </form>
+              </SearchBox>
             </Box>
           </Grid>
           <Grid item xs={12} sm={8}>
