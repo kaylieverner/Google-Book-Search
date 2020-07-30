@@ -18,8 +18,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+
+
 function Search() {
-  const [searchTerm, setSearchTerm] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState([]);
 
@@ -38,10 +40,11 @@ function Search() {
 
   function handleInputChange(event) {
     const { name, value } = event.target;
-    setSearchTerm({searchTerm: value})
+    setSearchTerm(event.target.value);
     console.log(searchTerm);
   };
 
+//works but doesnt take correct searchterm
   function handleFormSubmit(event) {
     const resultsStore = [];
       event.preventDefault();
@@ -51,6 +54,7 @@ function Search() {
       .catch(err => setError({ error: err.message }));
       };
 
+  
 
   // function handleFormSubmit(event) {
   //   event.preventDefault();
@@ -88,7 +92,7 @@ function Search() {
           key={result.id}
           src={result.volumeInfo.imageLinks.thumbnail}
           title={result.volumeInfo.title}
-          tagline={result.searchInfo.textSnippet}
+          // tagline={result.searchInfo.textSnippet}
           author={result.volumeInfo.authors}
           summary={result.volumeInfo.description}
           LbtnText={"View"}
