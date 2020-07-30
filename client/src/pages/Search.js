@@ -49,6 +49,7 @@ function Search() {
     if (results.length > 0){
       return results.map((result, index) => (
         <ResultCard
+          resultState={result}
           id={index}
           src={result.volumeInfo.imageLinks.thumbnail}
           title={result.volumeInfo.title}

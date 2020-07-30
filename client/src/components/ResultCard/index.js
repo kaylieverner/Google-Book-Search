@@ -16,7 +16,17 @@ export default function ResultCard(props) {
     function saveBook(event){
         console.log("saveBook function hit");
         event.preventDefault();
-      }
+        API.saveBook({
+            src: props.result.volumeInfo.imageLinks.thumbnail,
+            href: props.result.accessInfo.webReaderLink,
+            title: props.result.volumeInfo.title,
+            author: props.result.volumeInfo.authors,
+            summary: props.result.volumeInfo.description
+          })
+          .then(console.log(props.result.src))
+          .catch(err => console.log(err));
+        };
+      
 
     return (
         <div className="card mb-2" id={props.id}>
