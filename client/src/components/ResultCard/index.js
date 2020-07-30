@@ -16,13 +16,13 @@ export default function ResultCard(props) {
     function saveBook(event){
         console.log("saveBook function hit");
         event.preventDefault();
-        console.log(props.results[0].volumeInfo.imageLinks.thumbnail);
+        console.log(props.results[props.id].volumeInfo.imageLinks.thumbnail);
         API.saveBook({
-            src: props.results[0].volumeInfo.imageLinks.thumbnail,
-            href: props.results[0].accessInfo.webReaderLink,
-            title: props.results[0].volumeInfo.title,
-            author: props.results[0].volumeInfo.authors,
-            summary: props.results[0].volumeInfo.description
+            src: props.results[props.id].volumeInfo.imageLinks.thumbnail,
+            href: props.results[props.id].accessInfo.webReaderLink,
+            title: props.results[props.id].volumeInfo.title,
+            author: props.results[props.id].volumeInfo.authors,
+            summary: props.results[props.id].volumeInfo.description
           })
           .catch(err => console.log(err));
         };
