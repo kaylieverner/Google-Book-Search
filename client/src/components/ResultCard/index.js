@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import API from "../../utils/API";
@@ -14,6 +14,7 @@ export default function ResultCard(props) {
 
     function saveBook(event){
         event.preventDefault();
+        console.log("saved")
         API.saveBook({
             src: props.results[props.id].volumeInfo.imageLinks.thumbnail,
             href: props.results[props.id].accessInfo.webReaderLink,
@@ -23,8 +24,14 @@ export default function ResultCard(props) {
           })
           .catch(err => console.log(err));
         };
-      
 
+    function deleteBook(props){
+        console.log("delete")
+        API.deleteBook(props.savedBooks._id)
+        .then(res => props.loadSavedBooks())
+        .catch(err => console.log(err))
+    };
+      
     return (
         <div className="card mb-2" id={props.id}>
             <div className="card-body">
@@ -43,7 +50,7 @@ export default function ResultCard(props) {
                         {props.LbtnText}
                     </Button>
                     <Button
-                        onClick={saveBook}
+                        onClick={props.RbtnText === "Save" ? saveBook : deleteBook(props.savedBooks)}
                         className={classes.button}
                         variant="contained"
                         color="primary">

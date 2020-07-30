@@ -62,7 +62,7 @@ useEffect(() => {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
             <Box className={classes.box}>
-              <ResultContainer savedBooks={savedBooks}>
+              <ResultContainer loadSavedBooks={loadSavedBooks}>
                 {populateSavedResults()}
               </ResultContainer>
             </Box>
