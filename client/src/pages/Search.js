@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
-import { Box, Container, Grid, TextField} from '@material-ui/core';
+import { Box, Button, Container, Grid, TextField} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import SearchBox from "../components/SearchBox/index";
@@ -18,25 +18,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
-
 function Search() {
   const [searchTerm, setSearchTerm] = useState("");
   const [results, setResults] = useState([]);
   const [error, setError] = useState([]);
-
-  useEffect(() => {
-  
-  }, [])
-
-  function loadBooks() {
-    API.getBooks()
-    .then(res => 
-      // console.log(res.data)
-      console.log(res.data.items)
-      )
-      .catch(err => console.log(err))
-  };
 
   function handleInputChange(event) {
     const { name, value } = event.target;
@@ -44,45 +29,20 @@ function Search() {
     console.log(searchTerm);
   };
 
-//works but doesnt take correct searchterm
   function handleFormSubmit(event) {
-    const resultsStore = [];
       event.preventDefault();
       API.getBooks(searchTerm)
-      .then(res => setResults(res.data.items))
+      .then(res => {
+        if (res.data.items === "error") {
+          throw new Error(res.data.items);
+        }
+        setError("");
+        setResults(res.data.items)
+      })
+      // .then(res => setResults(res.data.items))
       .then(console.log(results))
       .catch(err => setError({ error: err.message }));
       };
-
-  
-
-  // function handleFormSubmit(event) {
-  //   event.preventDefault();
-  //   API.getBooks(searchTerm)
-  //   .then((res) => {
-  //     // if (res.data.status === "error") {
-  //     //   throw new Error(res.data.message);
-  //     // }
-  //     let response = res.data.items
-  //     setResults({results: response.json()});
-  //     console.log(results);
-  //   })
-  //   .catch(err => setError({ error: err.message }));
-  //   };
-
-  // function loadBooks() {
-  //   API.getBooks()
-  //     .then(res => 
-  //       setBooks(res.data)
-  //     )
-  //     .catch(err => console.log(err));
-  // };
-
-  // function deleteBook(id) {
-  //   API.deleteBook(id)
-  //     .then(res => loadBooks())
-  //     .catch(err => console.log(err));
-  // }
 
   function populateResults(){
     if (results.length > 0){
@@ -95,19 +55,16 @@ function Search() {
           // tagline={result.searchInfo.textSnippet}
           author={result.volumeInfo.authors}
           summary={result.volumeInfo.description}
-          LbtnText={"View"}
-          RbtnText={"Save"}
-        ></ResultCard>
-      ))
-      
+          LbtnText={<a target="_blank" href={result.accessInfo.webReaderLink}>View</a>}
+          RbtnText={"Save"}>
+        </ResultCard>
+      )) 
     } else {
-
       return <h2>No Results to Show</h2>
     }
   };
 
   const classes = useStyles();
-
     return (
       <Container>
         <Grid container spacing={2}>

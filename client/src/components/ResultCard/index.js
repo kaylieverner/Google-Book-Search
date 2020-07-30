@@ -23,6 +23,7 @@ export default function ResultCard(props) {
                     <p id="summary">{props.summary}</p>
                     </div>
                     <Button
+                        onClick={function(){"hello"}}
                         className={classes.button}
                         variant="contained"
                         color="primary">
