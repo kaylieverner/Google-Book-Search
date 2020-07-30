@@ -21,7 +21,7 @@ export default function ResultCard(props) {
             src: props.results[props.id].volumeInfo.imageLinks.thumbnail,
             href: props.results[props.id].accessInfo.webReaderLink,
             title: props.results[props.id].volumeInfo.title,
-            author: props.results[props.id].volumeInfo.authors,
+            author: props.results[props.id].volumeInfo.authors.toString(),
             summary: props.results[props.id].volumeInfo.description
           })
           .catch(err => console.log(err));
