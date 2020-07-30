@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -10,9 +10,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ResultCard(props) {
     const classes = useStyles();
+    const [savedBooks, setSavedBooks] = useState([]);
+
+    function saveBook(){
+        console.log("hi")
+      }
 
     return (
-        <div className="card mb-2">
+        <div className="card mb-2" id={props.id}>
             <div className="card-body">
                 <div className="media">
                 <img className="mr-3" src={props.src} alt="Cover Art"/>
@@ -23,13 +28,13 @@ export default function ResultCard(props) {
                     <p id="summary">{props.summary}</p>
                     </div>
                     <Button
-                        onClick={function(){"hello"}}
                         className={classes.button}
                         variant="contained"
                         color="primary">
                         {props.LbtnText}
                     </Button>
                     <Button
+                        onClick={saveBook}
                         className={classes.button}
                         variant="contained"
                         color="primary">

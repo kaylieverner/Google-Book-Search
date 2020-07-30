@@ -44,12 +44,12 @@ function Search() {
       .catch(err => setError({ error: err.message }));
       };
 
+     
   function populateResults(){
     if (results.length > 0){
-      console.log("hello")
-      return results.map(result => (
+      return results.map((result, index) => (
         <ResultCard
-          key={result.id}
+          id={index}
           src={result.volumeInfo.imageLinks.thumbnail}
           title={result.volumeInfo.title}
           // tagline={result.searchInfo.textSnippet}
