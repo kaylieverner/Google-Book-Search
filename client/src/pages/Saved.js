@@ -19,14 +19,21 @@ function Saved(props) {
   //upon loading the page, load saved books to populate the saved books into the Books list  
   useEffect(() => {
     loadSavedBooks()
+    console.log(savedBooks)
   }, [])
+
+useEffect(() => {
+    console.log(savedBooks)
+  }, [savedBooks])
+
 
   function loadSavedBooks() {
     API.getSavedBooks()
-    .then(res => 
+    .then(res => {
       setSavedBooks(res.data)
+      console.log(savedBooks)
+      }
     )
-    .then(console.log(savedBooks))
     .catch(err => console.log(err));
     };
   
