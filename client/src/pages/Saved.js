@@ -13,6 +13,23 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Saved(props) {
+  const [savedBooks, setSavedBooks] = useState([]);
+  const [error, setError] = useState([]);
+
+  //upon loading the page, load saved books to populate the saved books into the Books list  
+  useEffect(() => {
+    loadSavedBooks()
+  }, [])
+
+  function loadSavedBooks() {
+    API.getSavedBooks()
+    .then(res => 
+      setSavedBooks(res.data)
+    )
+    .then(console.log(savedBooks))
+    .catch(err => console.log(err));
+    };
+  
   // const [book, setBook] = useState({})
 
   // // When this component mounts, grab the book with the _id of props.match.params.id

@@ -11,12 +11,9 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ResultCard(props) {
     const classes = useStyles();
-    const [savedBooks, setSavedBooks] = useState([]);
 
     function saveBook(event){
-        console.log("saveBook function hit");
         event.preventDefault();
-        console.log(props.results[props.id].volumeInfo.imageLinks.thumbnail);
         API.saveBook({
             src: props.results[props.id].volumeInfo.imageLinks.thumbnail,
             href: props.results[props.id].accessInfo.webReaderLink,
