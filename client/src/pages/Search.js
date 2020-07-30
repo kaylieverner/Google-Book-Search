@@ -49,7 +49,7 @@ function Search() {
     if (results.length > 0){
       return results.map((result, index) => (
         <ResultCard
-          resultState={result}
+          results={results}
           id={index}
           src={result.volumeInfo.imageLinks.thumbnail}
           title={result.volumeInfo.title}
@@ -83,7 +83,7 @@ function Search() {
           </Grid>
           <Grid item xs={12} sm={8}>
             <Box className={classes.box}>
-              <ResultContainer>
+              <ResultContainer results={results}>
                 {populateResults()}
               </ResultContainer>
             </Box>

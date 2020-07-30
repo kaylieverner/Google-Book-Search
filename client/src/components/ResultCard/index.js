@@ -16,14 +16,14 @@ export default function ResultCard(props) {
     function saveBook(event){
         console.log("saveBook function hit");
         event.preventDefault();
+        console.log(props.results[0].volumeInfo.imageLinks.thumbnail);
         API.saveBook({
-            src: props.result.volumeInfo.imageLinks.thumbnail,
-            href: props.result.accessInfo.webReaderLink,
-            title: props.result.volumeInfo.title,
-            author: props.result.volumeInfo.authors,
-            summary: props.result.volumeInfo.description
+            src: props.results[0].volumeInfo.imageLinks.thumbnail,
+            href: props.results[0].accessInfo.webReaderLink,
+            title: props.results[0].volumeInfo.title,
+            author: props.results[0].volumeInfo.authors,
+            summary: props.results[0].volumeInfo.description
           })
-          .then(console.log(props.result.src))
           .catch(err => console.log(err));
         };
       
