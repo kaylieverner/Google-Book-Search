@@ -19,13 +19,11 @@ function Saved(props) {
   //upon loading the page, load saved books to populate the saved books into the Books list  
   useEffect(() => {
     loadSavedBooks()
-    console.log(savedBooks)
   }, [])
 
 useEffect(() => {
     console.log(savedBooks)
   }, [savedBooks])
-
 
   function loadSavedBooks() {
     API.getSavedBooks()
@@ -36,17 +34,27 @@ useEffect(() => {
     )
     .catch(err => console.log(err));
     };
-  
-  // const [book, setBook] = useState({})
 
-  // // When this component mounts, grab the book with the _id of props.match.params.id
-  // // e.g. localhost:3000/books/599dcb67f0f16317844583fc
-  // const {id} = useParams()
-  // useEffect(() => {
-  //   API.getBook(id)
-  //     .then(res => setBook(res.data))
-  //     .catch(err => console.log(err));
-  // }, [])
+    function populateSavedResults(){
+      if (savedBooks.length > 0){
+        console.log(savedBooks)
+        return savedBooks.map((savedBook, index) => (
+          <ResultCard
+            savedBooks={savedBooks}
+            id={index}
+            src={savedBook.src}
+            title={savedBook.title}
+            author={savedBook.authors}
+            summary={savedBook.summary}
+            LbtnText={<a target="_blank" href={savedBook.href}>View</a>}
+            RbtnText={"Delete"}>
+          </ResultCard>
+        )) 
+      } else {
+        return <h2>No Results to Show</h2>
+      }
+    };
+  
 
   const classes = useStyles();
 
@@ -55,17 +63,8 @@ useEffect(() => {
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12}>
             <Box className={classes.box}>
-              <ResultContainer title={"Saved Books"}
-              resultCard={<ResultCard
-                src={"https://via.placeholder.com/150"}
-                title={"Harry Potter"}
-                tagline={"Book about wizards"}
-                author={"JK Rowling"}
-                summary={"lorem ipsum stuff about harry potter summary stuff"}
-                LbtnText={"View"}
-                RbtnText={"Delete"}
-                ></ResultCard>} 
-              >
+              <ResultContainer savedBooks={savedBooks}>
+                {populateSavedResults()}
               </ResultContainer>
             </Box>
           </Grid>
