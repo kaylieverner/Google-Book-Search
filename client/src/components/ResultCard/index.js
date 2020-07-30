@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import API from "../../utils/API";
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -12,8 +13,9 @@ export default function ResultCard(props) {
     const classes = useStyles();
     const [savedBooks, setSavedBooks] = useState([]);
 
-    function saveBook(){
-        console.log("hi")
+    function saveBook(event){
+        console.log("saveBook function hit");
+        event.preventDefault();
       }
 
     return (
