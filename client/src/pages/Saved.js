@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
 import API from "../utils/API";
 import { Box, Container, Grid } from '@material-ui/core';
 import ResultContainer from "../components/ResultContainer/index";
@@ -12,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function Saved(props) {
+function Saved() {
   const [savedBooks, setSavedBooks] = useState([]);
   const [error, setError] = useState([]);
 
@@ -54,6 +53,8 @@ useEffect(() => {
         return <h2>No Results to Show</h2>
       }
     };
+
+    
   
   const classes = useStyles();
 

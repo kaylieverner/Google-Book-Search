@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ResultCard(props) {
     const classes = useStyles();
+    console.log(props)
 
     function saveBook(event){
         event.preventDefault();
@@ -27,7 +28,7 @@ export default function ResultCard(props) {
 
     function deleteBook(props){
         console.log("delete")
-        API.deleteBook(props.savedBooks._id)
+        API.deleteBook(props)
         .then(res => props.loadSavedBooks())
         .catch(err => console.log(err))
     };
@@ -50,7 +51,7 @@ export default function ResultCard(props) {
                         {props.LbtnText}
                     </Button>
                     <Button
-                        onClick={props.RbtnText === "Save" ? saveBook : deleteBook(props.savedBooks)}
+                        onClick={props.RbtnText === "Save" ? saveBook : deleteBook(props.savedBooks[props.id]._id)}
                         className={classes.button}
                         variant="contained"
                         color="primary">
