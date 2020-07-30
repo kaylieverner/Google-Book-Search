@@ -29,6 +29,7 @@ function Search() {
     console.log(searchTerm);
   };
 
+  //form submit if user clicks search icon button
   function handleFormSubmit(event) {
       event.preventDefault();
       API.getBooks(searchTerm)
@@ -43,6 +44,22 @@ function Search() {
       .then(console.log(results))
       .catch(err => setError({ error: err.message }));
       };
+
+    //form submit if user clicks enter
+    function onFormSubmit(event){
+      event.preventDefault();
+      API.getBooks(searchTerm)
+      .then(res => {
+        if (res.data.items === "error") {
+          throw new Error(res.data.items);
+        }
+        setError("");
+        setResults(res.data.items)
+      })
+      // .then(res => setResults(res.data.items))
+      .then(console.log(results))
+      .catch(err => setError({ error: err.message }));
+    }
 
      
   function populateResults(){
@@ -65,6 +82,8 @@ function Search() {
     }
   };
 
+  
+
   const classes = useStyles();
     return (
       <Container>
@@ -72,7 +91,7 @@ function Search() {
           <Grid item xs={12} sm={4}>
             <Box className={classes.box}>
               <SearchBox>
-                <form className="form" noValidate autoComplete="off">
+                <form className="form" noValidate autoComplete="off" onSubmit={onFormSubmit}>
                   <TextField id="outlined-basic" label="search" onChange={handleInputChange}/>
                   <IconButton color="primary" aria-label="upload picture" component="span" onClick={handleFormSubmit}>
                       <SearchIcon />
