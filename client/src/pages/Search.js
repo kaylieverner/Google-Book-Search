@@ -81,7 +81,6 @@ function Search() {
       return <h2>No Results to Show</h2>
     }
   };
-
   
   const classes = useStyles();
     return (

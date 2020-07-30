@@ -55,7 +55,6 @@ useEffect(() => {
       }
     };
   
-
   const classes = useStyles();
 
   return (
