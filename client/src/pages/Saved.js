@@ -39,8 +39,9 @@ useEffect(() => {
         console.log(savedBooks)
         return savedBooks.map((savedBook, index) => (
           <ResultCard
+            loadSavedBooks={loadSavedBooks}
             savedBooks={savedBooks}
-            id={index}
+            id={savedBook._id}
             src={savedBook.src}
             title={savedBook.title}
             author={savedBook.authors}

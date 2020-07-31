@@ -13,8 +13,7 @@ export default function ResultCard(props) {
     const classes = useStyles();
     console.log(props)
 
-    function saveBook(event){
-        event.preventDefault();
+    function saveBook(){
         console.log("saved")
         API.saveBook({
             src: props.results[props.id].volumeInfo.imageLinks.thumbnail,
@@ -26,9 +25,9 @@ export default function ResultCard(props) {
           .catch(err => console.log(err));
         };
 
-    function deleteBook(props){
+    function deleteBook(id){
         console.log("delete")
-        API.deleteBook(props)
+        API.deleteBook(id)
         .then(res => props.loadSavedBooks())
         .catch(err => console.log(err))
     };
@@ -51,7 +50,14 @@ export default function ResultCard(props) {
                         {props.LbtnText}
                     </Button>
                     <Button
-                        onClick={props.RbtnText === "Save" ? saveBook : deleteBook(props.savedBooks[props.id]._id)}
+                        onClick={(event) => {
+                            event.preventDefault()
+                            if (props.RbtnText === "Save") {
+                                saveBook()
+                            } else {
+                                deleteBook(props.id)
+                            }
+                        }}
                         className={classes.button}
                         variant="contained"
                         color="primary">
