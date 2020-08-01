@@ -38,6 +38,7 @@ useEffect(() => {
         console.log(savedBooks)
         return savedBooks.map((savedBook) => (
           <ResultCard
+            key={savedBook._id}
             loadSavedBooks={loadSavedBooks}
             savedBooks={savedBooks}
             id={savedBook._id}

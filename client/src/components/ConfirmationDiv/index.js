@@ -3,6 +3,6 @@ import './index.css';
 
 export default function ConfirmationDiv () {
   return (
-    <div className="alert alert-success " role="alert" id="savedMsg">Book Saved Successfully!</div>
+    <div className="alert alert-success hidden" role="alert" id="savedMsg">Book Saved Successfully!</div>
   );
 }

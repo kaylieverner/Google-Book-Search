@@ -28,8 +28,10 @@ export default function ResultCard(props) {
         };
 
         function confirmSaved(){
-            document.getElementById("savedMsg").classList.remove("hidden");
-            document.getElementById("savedMsg").innerHTML = "Book Saved Successfully!"
+            // document.getElementById("savedMsg").classList.remove("hidden");
+            // document.getElementById("savedMsg").innerHTML = "Book Saved Successfully!"
+            document.getElementById("savedMsg").style.display = 'block';
+            setTimeout(function() { document.getElementById("savedMsg").style.display = "none"; }, 1000);
         }
 
     function deleteBook(id){
@@ -56,7 +58,14 @@ export default function ResultCard(props) {
                         {props.LbtnText}
                     </Button>
                     <Button
-                        onClick={props.RbtnText === "Save" ? saveBook : deleteBook(props.savedBooks[props.id]._id)}
+                        onClick={(event) => {
+                            event.preventDefault()
+                            if (props.RbtnText === "Save") {
+                                saveBook()
+                            } else {
+                                deleteBook(props.id)
+                            }
+                        }}
                         className={classes.button}
                         variant="contained"
                         color="primary">
