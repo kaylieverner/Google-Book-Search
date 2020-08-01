@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
 
 function Saved() {
   const [savedBooks, setSavedBooks] = useState([]);
-  const [error, setError] = useState([]);
 
   //upon loading the page, load saved books to populate the saved books into the Books list  
   useEffect(() => {
@@ -37,7 +36,7 @@ useEffect(() => {
     function populateSavedResults(){
       if (savedBooks.length > 0){
         console.log(savedBooks)
-        return savedBooks.map((savedBook, index) => (
+        return savedBooks.map((savedBook) => (
           <ResultCard
             loadSavedBooks={loadSavedBooks}
             savedBooks={savedBooks}
@@ -46,7 +45,7 @@ useEffect(() => {
             title={savedBook.title}
             author={savedBook.authors}
             summary={savedBook.summary}
-            LbtnText={<a target="_blank" href={savedBook.href}>View</a>}
+            LbtnText={<a target="_blank" href={savedBook.href} rel="noopener noreferrer">View</a>}
             RbtnText={"Delete"}>
           </ResultCard>
         )) 

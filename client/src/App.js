@@ -5,6 +5,7 @@ import Saved from "./pages/Saved";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav/index";
 import Jumbotron from "./components/Jumbotron/index"
+import './style.css';
 
 function App() {
   return (

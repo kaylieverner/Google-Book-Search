@@ -1,0 +1,18 @@
+.jumbotronHeader {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bold;
+}
+
+.jumbotron {
+    background-image: url(https://render.fineartamerica.com/images/rendered/default/print/8/8/break/images/artworkimages/medium/1/seamless-book-pattern-background-wallpaper-diego-schtutman.jpg);
+    opacity: 0.5
+}
+
+.container {
+    background-color: rgba(127, 183, 236, 0.733);
+    color: rgb(255, 253, 253);
+}
+
+.tagline {
+    font-size: 28px;
+}

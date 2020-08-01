@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import API from "../utils/API";
-import { Link } from "react-router-dom";
-import { Box, Button, Container, Grid, TextField} from '@material-ui/core';
+import { Box, Container, Grid, TextField} from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import SearchBox from "../components/SearchBox/index";
 import ResultContainer from "../components/ResultContainer/index";
 import ResultCard from "../components/ResultCard/index";
+import ConfirmationDiv from "../components/ConfirmationDiv/index"
 import { makeStyles } from '@material-ui/core/styles';
+import "../style.css"
 
 const useStyles = makeStyles((theme) => ({
   box: {
@@ -24,9 +25,7 @@ function Search() {
   const [error, setError] = useState([]);
 
   function handleInputChange(event) {
-    const { name, value } = event.target;
     setSearchTerm(event.target.value);
-    console.log(searchTerm);
   };
 
   //form submit if user clicks search icon button
@@ -70,10 +69,9 @@ function Search() {
           id={index}
           src={result.volumeInfo.imageLinks.thumbnail}
           title={result.volumeInfo.title}
-          // tagline={result.searchInfo.textSnippet}
           author={result.volumeInfo.authors}
           summary={result.volumeInfo.description}
-          LbtnText={<a target="_blank" href={result.accessInfo.webReaderLink}>View</a>}
+          LbtnText={<a target="_blank" href={result.accessInfo.webReaderLink} rel="noopener noreferrer">View</a>}
           RbtnText={"Save"}>
         </ResultCard>
       )) 
@@ -85,6 +83,7 @@ function Search() {
   const classes = useStyles();
     return (
       <Container>
+        <ConfirmationDiv/>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
             <Box className={classes.box}>

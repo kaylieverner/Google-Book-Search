@@ -2,6 +2,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import API from "../../utils/API";
+import './index.css';
 
 const useStyles = makeStyles((theme) => ({
     button: {
@@ -15,6 +16,7 @@ export default function ResultCard(props) {
 
     function saveBook(){
         console.log("saved")
+        confirmSaved();
         API.saveBook({
             src: props.results[props.id].volumeInfo.imageLinks.thumbnail,
             href: props.results[props.id].accessInfo.webReaderLink,
@@ -25,6 +27,11 @@ export default function ResultCard(props) {
           .catch(err => console.log(err));
         };
 
+        function confirmSaved(){
+            document.getElementById("savedMsg").classList.remove("hidden");
+            document.getElementById("savedMsg").innerHTML = "Book Saved Successfully!"
+        }
+
     function deleteBook(id){
         console.log("delete")
         API.deleteBook(id)
@@ -33,16 +40,15 @@ export default function ResultCard(props) {
     };
       
     return (
-        <div className="card mb-2" id={props.id}>
-            <div className="card-body">
-                <div className="media">
+    <div className="card mb-2" id={props.id}>
+        <div className="card-body">
+            <div className="media">
                 <img className="mr-3" src={props.src} alt="Cover Art"/>
-                    <div className="media-body">
+                <div className="media-body">
                     <h5 className="mt-0" id="bookTitle">{props.title}</h5>
                     <p id="tagline">{props.tagline}</p>
                     <p id="author">{props.author}</p>
                     <p id="summary">{props.summary}</p>
-                    </div>
                     <Button
                         className={classes.button}
                         variant="contained"
@@ -50,14 +56,7 @@ export default function ResultCard(props) {
                         {props.LbtnText}
                     </Button>
                     <Button
-                        onClick={(event) => {
-                            event.preventDefault()
-                            if (props.RbtnText === "Save") {
-                                saveBook()
-                            } else {
-                                deleteBook(props.id)
-                            }
-                        }}
+                        onClick={props.RbtnText === "Save" ? saveBook : deleteBook(props.savedBooks[props.id]._id)}
                         className={classes.button}
                         variant="contained"
                         color="primary">
@@ -66,6 +65,7 @@ export default function ResultCard(props) {
                 </div>
             </div>
         </div>
-    
+    </div>
+
     )
 }
